@@ -15,7 +15,7 @@ const config = {
   },
   env: {
     development: {
-      initialProjectKey: 'ct-custom-app-demo',
+      initialProjectKey: 'sawako-pim',
     },
     production: {
       applicationId: '${env:APPLICATION_ID}',

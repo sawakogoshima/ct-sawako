@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
-import { CsvWidget } from './components/csvwidget/CsvWidget';
+// import { CsvWidget } from './components/csvwidget/CsvWidget';
+import ImportJobs from './components/ImportJobs/importJobs';
+import AddJobForm from './components/ImportJobs/add-job-form';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
@@ -24,7 +26,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
     <Spacings.Inset scale="l">
       <Switch>
         <Route>
-          <CsvWidget />
+          <ImportJobs />
         </Route>
       </Switch>
     </Spacings.Inset>
