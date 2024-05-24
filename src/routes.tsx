@@ -1,9 +1,7 @@
 import type { ReactNode } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
-// import { CsvWidget } from './components/csvwidget/CsvWidget';
 import ImportJobs from './components/ImportJobs/importJobs';
-import AddJobForm from './components/ImportJobs/add-job-form';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
@@ -21,11 +19,11 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
    * otherwise it won't render. Therefore, checking for "View" permissions here
    * is redundant and not strictly necessary.
    */
-
+  console.log('match.path:', match.path);
   return (
     <Spacings.Inset scale="l">
       <Switch>
-        <Route>
+        <Route path={`${match.path}/import-jobs`}>
           <ImportJobs />
         </Route>
       </Switch>
