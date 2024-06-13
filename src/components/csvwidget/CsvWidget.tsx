@@ -8,26 +8,28 @@ import { Box } from '@mui/material';
 interface CsvWidgetProps {
   dynamicColumns: { column_name: string }[];
   clearFormFields: () => void;
+  type: string;
 }
 
 export const CsvWidget: React.FC<CsvWidgetProps> = ({
   dynamicColumns,
   clearFormFields,
+  type,
 }) => {
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'fail'>(
     'idle'
   );
+  const handleImport = async (result: boolean, data: ImportData | null) => {
+    if (result && data !== null) {
+      const status = 'success';
 
-  const handleImport = (result: boolean, data: ImportData) => {
-    if (result) {
-      setImportStatus('success');
+      setImportStatus(status);
       console.log('success');
       console.log(`${data.total_rows} rows uploaded`);
       console.log('data', data);
 
       clearFormFields();
     } else {
-      setImportStatus('fail');
       console.log('fail');
     }
   };
@@ -35,7 +37,11 @@ export const CsvWidget: React.FC<CsvWidgetProps> = ({
     <div>
       <CSVBoxButton
         key={dynamicColumns.map((col) => col.column_name).join(',')}
-        licenseKey="Bmw57BonTzuR0l5WnMASIT03k4BGYs"
+        licenseKey={
+          type === 'Products'
+            ? 'Bmw57BonTzuR0l5WnMASIT03k4BGYs'
+            : 'nfFzoaskZ5P6ZB8LZLaMjxgeIWWjXh'
+        }
         user={{
           user_id: 'default123',
         }}

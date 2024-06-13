@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import type { ReactElement } from 'react';
 import Button from '@mui/material/Button';
 import { styled, Theme, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -7,36 +6,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 
 import { CsvWidget } from '../csvwidget/CsvWidget';
-import {
-  AttributeRow,
-  AttributesData,
-  attributesData,
-} from '../attributeData/attributesData';
-
-export interface NewJobFormState {
-  name: string;
-  type: string;
-}
-
-interface AddJobFormProps {
-  // isOpen: boolean;
-  // handleClose: () => void;
-  newJobFormState: {
-    name: string;
-    type: string;
-  };
-  setNewJobFormState: (newState: NewJobFormState) => void;
-  // handleSubmit: () => void;
-  // isLoading: boolean;
-  // isDisabled: boolean;
-}
+import { attributesData } from '../attributeData/attributesData';
 
 const HalfSizeDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-paper': {
@@ -59,10 +36,7 @@ const MenuProps = {
   },
 };
 
-const AddJobForm = ({
-  newJobFormState,
-  setNewJobFormState,
-}: AddJobFormProps) => {
+const AddJobForm: React.FC = () => {
   const [typeName, setTypeName] = useState<string | ''>('');
   const [open, setOpen] = useState(false);
   const [dynamicColumns, setDynamicColumns] = useState<
@@ -79,7 +53,6 @@ const AddJobForm = ({
   }, [typeName]);
 
   const handleClearForm = () => {
-    setNewJobFormState({ name: '', type: '' });
     setTypeName('');
   };
 
@@ -95,11 +68,6 @@ const AddJobForm = ({
   const handleTypeChange = (event: SelectChangeEvent<typeof typeName>) => {
     const selectedValue = event.target.value as string;
     setTypeName((type) => (type = selectedValue));
-
-    setNewJobFormState({
-      ...newJobFormState,
-      type: selectedValue,
-    });
   };
 
   return (
@@ -129,20 +97,6 @@ const AddJobForm = ({
         </DialogTitle>
         <DialogContent>
           <Box marginTop={2}>
-            <InputLabel required>Name</InputLabel>
-            <TextField
-              required
-              value={newJobFormState?.name || ''}
-              onChange={(event) =>
-                setNewJobFormState({
-                  ...(newJobFormState || {}),
-                  name: event.target.value,
-                })
-              }
-              style={{ width: '100%' }}
-            />
-          </Box>
-          <Box marginTop={2}>
             <InputLabel required id="demo-label">
               Types
             </InputLabel>
@@ -166,6 +120,7 @@ const AddJobForm = ({
             <CsvWidget
               dynamicColumns={dynamicColumns}
               clearFormFields={handleClearForm}
+              type={typeName}
             />
           </Box>
         </DialogContent>
