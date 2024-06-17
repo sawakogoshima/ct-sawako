@@ -4,14 +4,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import TableReports from '../TableReports';
 import StyledButton from './StyledButton';
 
-// const defaultFormState: NewJobFormState = {
-// name: '',
-//   type: '',
-// };
-
 const ImportJobs = () => {
-  // const [newJobFormState, setNewJobFormState] =
-  //   useState<NewJobFormState>(defaultFormState);
   const [tableType, setTableType] = useState('products');
   const [statusText, setStatusText] = useState('');
 
@@ -31,24 +24,19 @@ const ImportJobs = () => {
                 </Typography>
                 <Grid item xs={6}>
                   <StyledButton
-                    // color="primary"
                     sx={{ marginRight: 2 }}
                     onClick={() => setTableType('products')}
                   >
                     Products Import Report
                   </StyledButton>
                   <StyledButton
-                    // color="primary"
                     sx={{ marginLeft: 2 }}
                     onClick={() => setTableType('variants')}
                   >
                     Variants Import Report
                   </StyledButton>
                 </Grid>
-                <AddJobForm
-                // newJobFormState={newJobFormState}
-                // setNewJobFormState={setNewJobFormState}
-                />
+                <AddJobForm />
               </Box>
               {/* <TableReports tableType={tableType} statusText={statusText} /> */}
               <TableReports />

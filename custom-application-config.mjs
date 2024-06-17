@@ -17,10 +17,10 @@ const config = {
     development: {
       initialProjectKey: 'sawako-pim',
     },
-    production: {
-      applicationId: '${env:APPLICATION_ID}',
-      url: '${env:APP_URL}',
-    },
+    // production: {
+    //   applicationId: '${env:APPLICATION_ID}',
+    //   url: '${env:APP_URL}',
+    // },
   },
   oAuthScopes: {
     view: ['view_products'],
