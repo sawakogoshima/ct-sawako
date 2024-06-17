@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import AddJobForm from './Add-job-form';
+import AddJobForm from './add-job-form';
 import { Box, Grid, Typography } from '@mui/material';
 import TableReports from '../TableReports';
-import StyledButton from './StyledButton';
+import StyledButton from './styledButton';
 
 const ImportJobs = () => {
   const [tableType, setTableType] = useState('products');

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
-import ImportJobs from './components/ImportJobs/ImportJobs';
+import ImportJobs from './components/ImportJobs/importJobs';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
