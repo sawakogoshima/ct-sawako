@@ -2,7 +2,6 @@ import { useState } from 'react';
 import AddJobForm from './add-job-form';
 import { Box, Grid, Typography } from '@mui/material';
 import TableReports from '../TableReports';
-import StyledButton from './styledButton';
 
 const ImportJobs = () => {
   const [tableType, setTableType] = useState('products');
@@ -22,20 +21,7 @@ const ImportJobs = () => {
                 <Typography variant="h5" color="textPrimary" gutterBottom>
                   PIM
                 </Typography>
-                <Grid item xs={6}>
-                  <StyledButton
-                    sx={{ marginRight: 2 }}
-                    onClick={() => setTableType('products')}
-                  >
-                    Products Import Report
-                  </StyledButton>
-                  <StyledButton
-                    sx={{ marginLeft: 2 }}
-                    onClick={() => setTableType('variants')}
-                  >
-                    Variants Import Report
-                  </StyledButton>
-                </Grid>
+                <Grid item xs={6}></Grid>
                 <AddJobForm />
               </Box>
               {/* <TableReports tableType={tableType} statusText={statusText} /> */}
