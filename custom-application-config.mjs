@@ -15,12 +15,12 @@ const config = {
   },
   env: {
     development: {
-      initialProjectKey: 'sawako-pim',
+      initialProjectKey: '${env:CTP_PROJECT_KEY}',
     },
-    // production: {
-    //   applicationId: '${env:APPLICATION_ID}',
-    //   url: '${env:APP_URL}',
-    // },
+    production: {
+      applicationId: '${env:APPLICATION_ID}',
+      url: '${env:APP_URL}',
+    },
   },
   oAuthScopes: {
     view: ['view_products'],
@@ -28,18 +28,18 @@ const config = {
   },
   icon: '${path:@commercetools-frontend/assets/application-icons/rocket.svg}',
   mainMenuLink: {
-    defaultLabel: 'Template starter',
+    defaultLabel: 'Import Job',
     labelAllLocales: [],
     permissions: [PERMISSIONS.View],
   },
-  submenuLinks: [
-    {
-      uriPath: 'channels',
-      defaultLabel: 'Channels',
-      labelAllLocales: [],
-      permissions: [PERMISSIONS.View],
-    },
-  ],
+  // submenuLinks: [
+  //   {
+  //     uriPath: 'channels',
+  //     defaultLabel: 'Channels',
+  //     labelAllLocales: [],
+  //     permissions: [PERMISSIONS.View],
+  //   },
+  // ],
 };
 
 export default config;

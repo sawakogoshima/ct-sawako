@@ -1,126 +1,88 @@
+import { BASE_API_URL } from '../../apiConfig';
+
 export interface AttributeRow {
-  id: string;
   column_name: string;
-  type: string;
 }
 
 export interface AttributesData {
   [type: string]: AttributeRow[];
 }
 
-export const attributesData: AttributesData = {
-  Products: [
-    {
-      id: '1',
-      column_name: 'Brand',
-      type: 'Product',
-    },
-    {
-      id: '2',
-      column_name: 'Range',
-      type: 'Product',
-    },
-    {
-      id: '3',
-      column_name: 'Supplier',
-      type: 'Product',
-    },
-    {
-      id: '4',
-      column_name: 'Industries',
-      type: 'Product',
-    },
-    {
-      id: '5',
-      column_name: 'Product_type',
-      type: 'Product',
-    },
-    {
-      id: '6',
-      column_name: 'Colour_group',
-      type: 'Product',
-    },
-    {
-      id: '7',
-      column_name: 'Colour',
-      type: 'Product',
-    },
-    {
-      id: '8',
-      column_name: 'Length',
-      type: 'Product',
-    },
-    {
-      id: '9',
-      column_name: 'Width',
-      type: 'Product',
-    },
-    {
-      id: '10',
-      column_name: 'Height',
-      type: 'Product',
-    },
-    {
-      id: '11',
-      column_name: 'Package_length',
-      type: 'Product',
-    },
-    {
-      id: '12',
-      column_name: 'Package_width',
-      type: 'Product',
-    },
-    {
-      id: '13',
-      column_name: 'Package_height',
-      type: 'Product',
-    },
-    {
-      id: '14',
-      column_name: 'Weight',
-      type: 'Product',
-    },
-    {
-      id: '15',
-      column_name: 'Sell',
-      type: 'Product',
-    },
-    {
-      id: '16',
-      column_name: 'Buy',
-      type: 'Product',
-    },
-    {
-      id: '17',
-      column_name: 'Gender',
-      type: 'Product',
-    },
-    {
-      id: '18',
-      column_name: 'Materials',
-      type: 'Product',
-    },
-    {
-      id: '19',
-      column_name: 'Certifications',
-      type: 'Product',
-    },
-    {
-      id: '20',
-      column_name: 'Abrasiviness',
-      type: 'Product',
-    },
-  ],
-  Variants: [
-    {
-      id: '1',
-      column_name: 'Brand_Variants',
-      type: 'Variant',
-    },
-    {
-      id: '2',
-      column_name: 'Range_Variants',
-      type: 'Variant',
-    },
-  ],
-};
+export let attributesData: AttributesData = {};
+
+async function fetchAndUpdateAttributesData() {
+  try {
+    // Fetch ProductAttrs data
+    const productAttrsResponse = await fetch(
+      `${BASE_API_URL}/product-attributes`
+    );
+    if (!productAttrsResponse.ok) {
+      throw new Error(`HTTP error! status: ${productAttrsResponse.status}`);
+    }
+    const productAttrsData = await productAttrsResponse.json();
+    console.log('productAttrsData', productAttrsData);
+
+    // Fetch variantAttrs data
+    const variantAttrsResponse = await fetch(
+      `${BASE_API_URL}/product-variant/attributes`
+    );
+    const variantAttrsData = await variantAttrsResponse.json();
+    console.log('variantAttrsData', variantAttrsData);
+
+    // Fetch categoryAttrs data
+    // const categoryAttrsResponse = await fetch(
+    //   `${BASE_API_URL}/category-attributes`
+    // );
+    // const categoryAttrsData = await categoryAttrsResponse.json();
+
+    // Fetch productCategoryMappingImport data
+    // const productCategoryMappingImportResponse = await fetch(
+    //   `${BASE_API_URL}/`
+    // );
+    // const productCategoryMappingImportData =
+    //   await productCategoryMappingImportResponse.json();
+
+    // Update attributesData
+    attributesData = {
+      products_import: productAttrsData.map((row: string) => ({
+        column_name: row,
+      })),
+
+      variants_import: variantAttrsData.map((row: string) => ({
+        column_name: row,
+      })),
+
+      categories_import: [
+        { column_name: 'categories' },
+        { column_name: 'categories2' },
+      ],
+
+      product_category_mapping_import: [
+        { column_name: 'category_mapping_import' },
+        { column_name: 'category_mapping_import2' },
+      ],
+
+      // categories_import: categoryAttrsData.map((row: string) => ({
+      //   column_name: row,
+      // })),
+
+      // product_category_mapping_import: productCategoryMappingImportData.map(
+      //   (row: string) => ({
+      //     column_name: row,
+      //   })
+      // ),
+    };
+
+    attributesData = Object.keys(attributesData).reduce((acc, key) => {
+      const newKey = key.replace(/_/g, ' ');
+      acc[newKey] = attributesData[key];
+      return acc;
+    }, {} as { [key: string]: AttributeRow[] });
+  } catch (error) {
+    console.error('Error fetching data: ', error);
+  }
+}
+
+fetchAndUpdateAttributesData();
+
+console.log('AttributesData', attributesData);
