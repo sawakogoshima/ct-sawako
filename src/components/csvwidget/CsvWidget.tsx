@@ -36,6 +36,10 @@ export const CsvWidget: React.FC<CsvWidgetProps> = ({
     }
   };
 
+  console.log(
+    'CSVBOX_KEY_PRODUCTS:',
+    process.env.REACT_APP_CSVBOX_KEY_PRODUCTS
+  );
   let licenseKey = '';
   if (type === 'products import') {
     licenseKey = process.env.REACT_APP_CSVBOX_KEY_PRODUCTS || '';
