@@ -22,6 +22,9 @@ const config = {
       url: '${env:APP_URL}',
     },
   },
+  additionalEnv: {
+    csvBoxKeyProducts: '${env:REACT_APP_CSVBOX_KEY_PRODUCTS}',
+  },
   oAuthScopes: {
     view: ['view_products'],
     manage: ['manage_products'],

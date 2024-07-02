@@ -4,6 +4,7 @@ import styles from './csvWidget.module.css';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import { ImportData } from '../attributeData/columnsData';
 import Spacings from '@commercetools-uikit/spacings';
+import config from '../../../custom-application-config.mjs';
 
 interface CsvWidgetProps {
   dynamicColumns: { column_name: string }[];
@@ -36,10 +37,7 @@ export const CsvWidget: React.FC<CsvWidgetProps> = ({
     }
   };
 
-  console.log(
-    'CSVBOX_KEY_PRODUCTS:',
-    process.env.REACT_APP_CSVBOX_KEY_PRODUCTS
-  );
+  console.log('CSVBOX_KEY_PRODUCTS:', config?.additionalEnv?.csvBoxKeyProducts);
   let licenseKey = '';
   if (type === 'products import') {
     licenseKey = process.env.REACT_APP_CSVBOX_KEY_PRODUCTS || '';
